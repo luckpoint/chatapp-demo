@@ -1,0 +1,3 @@
+app/platforms/android/.gradle/
+app/platforms/android/CordovaLib/build/
+server/node_modules/
