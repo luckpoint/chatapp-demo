@@ -1,0 +1,49 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>meteor chat</title>
+</head>
+
+<body>
+  {{> header }}
+  {{> textChat }}
+  {{> inputBox }}
+</body>
+
+<template name="header">
+<header>
+  <nav>
+  <div class="nav-wrapper blue lighten-1">
+    <a href="#" class="brand-logo">meteor chat</a>
+  </div>
+  </nav>
+</header>
+</template>
+
+<template name="textChat">
+<div id="chat-messages">
+  {{#each messages}}
+  {{> message user=user text=text timestamp=timestamp}}
+  {{/each}}
+</div>
+</template>
+
+<template name="message">
+<div class="row">
+  <div class="message s12">
+    <span class="blue-text col s3 message_username">{{username user}}: </span>
+    <span class="blue-text col s6 message_content">「{{text}}」</span>
+    <span class="blue-text col s3 message_timestamp"> {{timestampToTime timestamp}}</span>
+  </div>
+</div>
+</template>
+
+<template name="inputBox">
+<div class="row">
+  <div class="input-field input-box col s12">
+    <input type="text" id="input-box-text" class="col s8" />
+    <button id="send" class="waves-effect waves-light btn">Send</button>
+    <label for="input-box-text">Messages: </label>
+  </div>
+</div>
+</template>
