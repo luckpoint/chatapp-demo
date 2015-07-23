@@ -1,5 +1,5 @@
 var ip = require('ip');
-var port = 9000;
+var port = 80;
 
 var PeerServer = require('peer').PeerServer;
 var server = new PeerServer({port: port, allow_discovery: true});
