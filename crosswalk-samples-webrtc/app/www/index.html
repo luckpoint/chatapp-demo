@@ -28,22 +28,64 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+
+        <!-- Enable all requests, inline styles, and eval() -->
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
+    <title>WebRTC client</title>
+
+    <style>
+    #credentials, #dialler, #messages {
+      clear: both;
+    }
+    #remote-video {
+      max-width: 300px;
+    }
+    #local-video {
+      max-width: 150px;
+    }
+    </style>
     </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
+  <body>
+
+    <div id="credentials">
+      <p>
+        Connect as: <input type="text" id="caller-id" size="15">
+        <button id="connect">Connect</button>
+      </p>
+    </div>
+
+    <div id="dialler" data-active="false">
+      <p>
+        Make call to:
+        <input type="select" id="recipient-id">
+        </input>
+        <button id="dial">Call</button>
+      </p>
+
+      <hr>
+
+      <p><strong>REMOTE:</strong></p>
+      <video id="remote-video" autoplay></video>
+
+      <hr>
+
+      <p><strong>LOCAL:</strong></p>
+      <video id="local-video" autoplay></video>
+    </div>
+
+    <hr>
+
+    <div id="messages">
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="peer.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
 </html>
