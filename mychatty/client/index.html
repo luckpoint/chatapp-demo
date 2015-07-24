@@ -1,0 +1,104 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>WebRTC client</title>
+
+  <style>
+  #remote-video {
+    width: 640px;
+  }
+  #local-video {
+    width: 160px;
+  }
+  </style>
+
+  <script type="text/javascript" charset="utf-8" src="/peer.js"></script>
+  <!--
+  <script type="text/javascript" charset="utf-8" src="/main.js"></script>
+  -->
+</head>
+
+<body>
+  {{> header }}
+  {{> videoChat }}
+  {{> textChat }}
+  {{> inputBox }}
+  {{> log }}
+</body>
+
+<template name="header">
+<header>
+  <nav>
+  <div class="nav-wrapper blue lighten-1">
+    <a href="#" class="brand-logo">My Chatty</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="/about.html">About</a></li>
+    </ul>
+  </div>
+  </nav>
+</header>
+</template>
+
+<template name="videoChat">
+<div class="row">
+  <div class="input-field col s12">
+    <input type="text" id="caller-id" class="col s8"/>
+    <button id="connect" class="waves-effect waves-light btn">Set</button>
+    <label for="caller-id">Connect as:</label>
+  </div>
+</div>
+
+<div class="row">
+  <div id="dialler" data-active="false" class="input-field col s12">
+    <input type="text" id="recipient-id" class="col s8"/>
+    <button id="dial" class="waves-effect waves-light btn">Call</button>
+    <label for="recipient-id">Make call to:</label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <video id="local-video" autoplay></video>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <video id="remote-video" autoplay></video>
+  </div>
+</div>
+<hr />
+</template>
+
+<template name="textChat">
+<div id="chat-messages">
+  {{#each messages}}
+  {{> message user=user text=text timestamp=timestamp}}
+  {{/each}}
+</div>
+</template>
+
+<template name="message">
+<div class="row">
+  <div class="message s12">
+    <span class="blue-text col s3 message_username">{{username user}}: </span>
+    <span class="blue-text col s6 message_content">「{{text}}」</span>
+    <span class="blue-text col s3 message_timestamp"> {{timestampToTime timestamp}}</span>
+  </div>
+</div>
+</template>
+
+<template name="inputBox">
+<div class="row">
+  <div class="input-field input-box col s12">
+    <input type="text" id="input-box-text" class="col s8" />
+    <button id="send" class="waves-effect waves-light btn">Send</button>
+    <label for="input-box-text">Messages: </label>
+  </div>
+</div>
+</template>
+
+
+<template name="log">
+<div id="messages">
+</div>
+</template>
